@@ -1,3 +1,4 @@
+# This is the solution runner script
 export def part1 [] {
   let data = (
     open ~/.cache/aoc/2024/day2/input.txt
