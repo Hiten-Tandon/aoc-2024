@@ -11,3 +11,15 @@ export def "day1 part2" [] {
   use ./day1/solution.nu
   solution part2
 }
+
+export def "day2 part1" [] {
+  get_day initialize 2
+  use ./day2/solution.nu
+  solution part1
+}
+
+export def "day2 part2" [] {
+  get_day initialize 2
+  use ./day2/solution.nu
+  solution part2
+}
