@@ -35,11 +35,9 @@ fn download_input(day: Int) -> Result(String, AocError) {
   |> request.prepend_header("cookie", "session=" <> cookie)
   |> httpc.send()
   |> result.map(fn(x) {
-    let _ =
-      simplifile.write(
-        home <> "/.cache/aoc/2024/day" <> int.to_string(day) <> "/input.txt",
-        x.body,
-      )
+    let dir = home <> "/.cache/aoc/2024/day" <> int.to_string(day)
+    let _ = dir |> simplifile.create_directory_all()
+    let _ = dir |> string.append("/input.txt") |> simplifile.write(x.body)
     x.body
   })
   |> result.replace_error(HttpError)
