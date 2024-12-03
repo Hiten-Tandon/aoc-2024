@@ -9,7 +9,7 @@ export def part1 [] {
 }
 
 export def part2 [] {
-  let res = (rg --regexp "(mul\\(\\d+,\\d+\\))|(do(n't)?)" ~/.cache/aoc/2024/day3/input.txt --no-line-number --no-filename --mmap -o --color never
+  let res = (rg --regexp "(mul\\(\\d+,\\d+\\))|(do(n't)?\\(\\))" ~/.cache/aoc/2024/day3/input.txt --no-line-number --no-filename --mmap -o --color never
     | lines 
     | reduce --fold [0 true] {|x, acc|
       match $x {
