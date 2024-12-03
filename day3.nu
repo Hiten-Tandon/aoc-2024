@@ -13,8 +13,8 @@ export def part2 [] {
     | lines 
     | reduce --fold [0 true] {|x, acc|
       match $x {
-        "do" => [$acc.0 true],
-        "don't" => [$acc.0 false],
+        "do()" => [$acc.0 true],
+        "don't()" => [$acc.0 false],
         $y if $acc.1 == true => {
           let temp = ($y | parse "mul({n1},{n2})" | transpose).column1;
           [($acc.0 + ($temp.0 | into int) * ($temp.1 | into int)) $acc.1]
