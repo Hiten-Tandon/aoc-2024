@@ -37,10 +37,10 @@ pub fn main() {
             should_add,
           )
         }
-        regexp.Match("do", _) -> {
+        regexp.Match("do()", _) -> {
           #(acc, True)
         }
-        regexp.Match("don't", _) -> {
+        regexp.Match("don't()", _) -> {
           #(acc, False)
         }
         _ -> {
