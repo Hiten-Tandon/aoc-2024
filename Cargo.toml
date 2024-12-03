@@ -1,0 +1,8 @@
+[workspace]
+resolver = "2"
+members = ["day1", "utilities"]
+
+
+[workspace.dependencies]
+itertools = "0.13.0"
+rayon = "1.10.0"
