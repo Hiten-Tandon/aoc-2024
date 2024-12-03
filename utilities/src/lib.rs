@@ -15,7 +15,8 @@ pub enum AocError {
 
 pub fn get_input(day: u8) -> Result<String, AocError> {
     let home = std::env::var("HOME").unwrap_or_default();
-    fs::read_to_string(format!("{home}/.cache/aoc/2024/day{day}")).or_else(|_| download_data(day))
+    fs::read_to_string(format!("{home}/.cache/aoc/2024/day{day}/input.txt"))
+        .or_else(|_| download_data(day))
 }
 
 fn download_data(day: u8) -> Result<String, AocError> {
@@ -25,13 +26,14 @@ fn download_data(day: u8) -> Result<String, AocError> {
     client
         .execute(
             client
-                .get(format!("https://www.adventofcode.com/2024/day/{day}/input"))
+                .get(format!("https://adventofcode.com/2024/day/{day}/input"))
                 .header(
                     COOKIE,
                     format!(
                         "session={}",
-                        fs::read_to_string(format!("{home}/.cache/aoc/SESSION_COOKIE.txt",))
+                        fs::read_to_string(format!("{home}/.cache/aoc/SESSION_COOKIE.txt"))
                             .map_err(|_| AocError::SessionError)?
+                            .trim()
                     ),
                 )
                 .build()
@@ -41,8 +43,10 @@ fn download_data(day: u8) -> Result<String, AocError> {
         .read_to_string(&mut data)
         .map_err(AocError::ParsingError)?;
 
-    fs::create_dir_all(format!("{home}/.cache/aoc/2024/day{day}")).map_err(AocError::FileError)?;
-    fs::write(format!("{home}/.cache/aoc/2024/day{day}"), data.as_str())
-        .map_err(AocError::FileError)?;
+    _ = fs::create_dir_all(format!("{home}/.cache/aoc/2024/day{day}"));
+    _ = fs::write(
+        format!("{home}/.cache/aoc/2024/day{day}/input.txt"),
+        data.as_str(),
+    );
     Ok(data)
 }
