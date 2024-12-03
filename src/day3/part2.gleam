@@ -10,7 +10,7 @@ pub fn main() {
   use data <- result.try(get_input(3))
   use mul_pattern <- result.try(
     regexp.compile(
-      "(mul\\((\\d+),(\\d+)\\))|(do(n't)?)",
+      "(mul\\((\\d+),(\\d+)\\))|(do(n't)?\\(\\))",
       regexp.Options(False, False),
     )
     |> result.replace_error(utility.FileError),
