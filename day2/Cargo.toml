@@ -1,0 +1,17 @@
+[package]
+name = "day2"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+itertools = "0.13.0"
+rayon = "1.10.0"
+utilities = { path = "../utilities" }
+
+[[bin]]
+name = "part1"
+path = "src/part1.rs"
+
+[[bin]]
+name = "part2"
+path = "src/part2.rs"
