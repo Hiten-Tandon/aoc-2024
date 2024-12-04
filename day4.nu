@@ -31,7 +31,7 @@ export def part1 [] {
 }
 
 export def part2 [] {
-  open ~/.cache/aoc/2024/day4/input.txt
+  let res = (open ~/.cache/aoc/2024/day4/input.txt
     | lines
     | each {$in | split chars }
     | window 3
@@ -58,5 +58,7 @@ export def part2 [] {
         ] => 1
         _ => 0
       }
-    } | math sum
+    } | math sum)
+  wl-copy $res;
+  $res
 } 
