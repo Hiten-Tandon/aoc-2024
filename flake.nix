@@ -15,7 +15,7 @@
         overlays = [ (import rust-overlay) ];
       }; {
         devShells.default = mkShell {
-          nativeBuildInputs = [ rust-bin.nightly.latest.default cargo oniguruma pkg-config rust-analyzer openssl_3_3];
+          nativeBuildInputs = [ rust-bin.nightly.latest.default cargo oniguruma pkg-config rust-analyzer openssl_3_3 libclang ];
         };
         formatter = nixfmt-classic;
       });

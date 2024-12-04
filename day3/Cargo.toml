@@ -1,0 +1,18 @@
+[package]
+name = "day3"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+utilities = { path = "../utilities" }
+itertools = "0.13.0"
+rayon = "1.10.0"
+onig = { git = "https://github.com/rust-onig/rust-onig", version = "6.4.0", default-features = false }
+
+[[bin]]
+name = "part1"
+path = "src/part1.rs"
+
+[[bin]]
+name = "part2"
+path = "src/part2.rs"
