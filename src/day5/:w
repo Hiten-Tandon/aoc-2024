@@ -1,0 +1,27 @@
+import gleam/int
+import gleam/list
+import gleam/result
+import gleam/string
+import utility.{get_input}
+
+pub fn main() {
+  use data <- result.try(get_input(5))
+
+  let assert Ok(#(ordering, production)) =
+    data
+    |> string.split_once("\n\n")
+
+  ordering
+  |> string.split("\n")
+  |> list.map(fn(x) { x |> string.split_once("|") })
+  |> result.values
+  |> list.map(fn(x) {
+    use a <- result.try(int.parse(x.0))
+    use b <- result.try(int.parse(x.1))
+    #(a, b) |> Ok
+  })
+  |> result.values
+
+  Nil
+  |> Ok()
+}
