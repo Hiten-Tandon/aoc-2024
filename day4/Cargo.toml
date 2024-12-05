@@ -1,0 +1,15 @@
+[package]
+name = "day4"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+utilities = { path = "../utilities" }
+
+[[bin]]
+name = "day4-part1"
+path = "src/part1.rs"
+
+[[bin]]
+name = "day4-part2"
+path = "src/part2.rs"
