@@ -3,7 +3,7 @@ export def initialize [day: int] {
     return
   }
   mkdir $"($env.HOME)/.cache/aoc/2024/day($day)"
-  curl -s --cookie $"session=(open $"($env.HOME)/.cache/aoc/SESSION_COOKIE.txt")" $"https://adventofcode.com/2024/day/($day)/input" 
+  http get $"https://adventofcode.com/2024/day/($day)/input" --headers [Cookie $"session=(open $"($env.HOME)/.cache/aoc/SESSION_COOKIE.txt" | str trim)"]
     | save $"($env.HOME)/.cache/aoc/2024/day($day)/input.txt"
 }
 
