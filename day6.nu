@@ -51,8 +51,7 @@ export def part1 [] {
     | select index item_index
     | rename row col
 
-  # let res = ((walk $spos.row.0 $spos.col.0 N {}) | columns | length)
-  # wl-copy $res
-  # $res
-  walk ($spos.row.0 | into int) ($spos.col.0 | into int) N {}
+  let res = ((walk $spos.row.0 $spos.col.0 N {}) | columns | length)
+  wl-copy $res
+  $res
 }
