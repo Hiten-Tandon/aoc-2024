@@ -49,7 +49,6 @@ export def "solve day4 part2" [] {
 }
 
 export def "solve day5 part1" [] {
-  log warning "This can take ages, if you don't have time please don't run"
   get_day initialize 5
   day5 part1
 }
@@ -57,4 +56,14 @@ export def "solve day5 part1" [] {
 export def "solve day5 part2" [] {
   get_day initialize 5
   day5 part2
+}
+
+export def "solve day7 part1" [] {
+  get_day initialize 7
+  day7 part1
+}
+
+export def "solve day7 part2" [] {
+  get_day initialize 7
+  day7 part2
 }
