@@ -45,24 +45,14 @@ export def part1 [] {
     }
   }
 
-  $seen | columns | length
+  let res = $seen | columns | length
+  wl-copy $res
+  $res
 }
 
 
 export def part2 [] {
   let data = open ~/.cache/aoc/2024/day8/input.txt
-  let data = "............
-........0...
-.....0......
-.......0....
-....0.......
-......A.....
-............
-............
-........A...
-.........A..
-............
-............"
       | lines 
       | each {$in | split chars} 
   
@@ -87,29 +77,31 @@ export def part2 [] {
       let p1 = $v | get $i
       for j in ($i + 1)..<$len {
         let p2 = $v | get $j
-        let dx = $p2.0 - $p1.0
-        let dy = $p2.1 - $p1.1
+        let dr = $p2.0 - $p1.0
+        let dc = $p2.1 - $p1.1
 
-        mut npx = $p1.0 - $dx 
-        mut npy = $p1.1 - $dy
+        mut npr = $p1.0
+        mut npc = $p1.1
 
-        while $npx in 0..<$row_count and $npy in 0..<$col_count {
-          $seen = $seen | upsert $"\(($npx), ($npy)\)" true
-          $npx -= $dx
-          $npy -= $dy
+        while $npr in 0..<$row_count and $npc in 0..<$col_count {
+          $seen = $seen | upsert $"\(($npr), ($npc)\)" true
+          $npr -= $dr
+          $npc -= $dc
         }
 
-        $npx = $p2.0 + $dx
-        $npy = $p2.1 + $dy
+        $npr = $p2.0
+        $npc = $p2.1
 
-        while $npx in 0..<$row_count and $npy in 0..<$col_count {
-          $seen = $seen | upsert $"\(($npx), ($npy)\)" true
-          $npx += $dx
-          $npy += $dy
+        while $npr in 0..<$row_count and $npc in 0..<$col_count {
+          $seen = $seen | upsert $"\(($npr), ($npc)\)" true
+          $npr += $dr
+          $npc += $dc
         }
       }
     }
   }
 
-  $seen
+  let res = $seen | columns | length
+  wl-copy $res
+  $res
 }

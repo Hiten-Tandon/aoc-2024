@@ -4,6 +4,8 @@ use day2.nu
 use day3.nu
 use day4.nu
 use day5.nu
+use day7.nu
+use day8.nu
 use std/log
 
 export def "solve day1 part1" [] {
@@ -66,4 +68,14 @@ export def "solve day7 part1" [] {
 export def "solve day7 part2" [] {
   get_day initialize 7
   day7 part2
+}
+
+export def "solve day8 part1" [] {
+  get_day initialize 8
+  day8 part1
+}
+
+export def "solve day8 part2" [] {
+  get_day initialize 8
+  day8 part2
 }
