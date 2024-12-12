@@ -53,18 +53,20 @@ export def part1 [] {
 }
 
 export def part2 [] {
-  mut val = open ~/.cache/aoc/2024/day9/input.txt 
-    | str trim 
-    | split chars 
-    | par-each { $in | into int } 
-    | enumerate
-    | reduce --fold [[] []] {|x, acc|
-      if $x.index mod 2 == 0 {
-        [($acc.0 | prepend [[($x.index // 2) $x.item]]) $acc.1]
-      } else if $x.item != 0 {
-       [$acc.0 ($acc.1 | append $x.item)]
-      } else {
-        $acc
-      }
-    } 
+  use std/iter
+  let data = "2333133121414131402" # open ~/.cache/aoc/2024/day9/input.txt 
+            | str trim 
+            | split chars 
+            | each { $in | into int } 
+            | iter scan 0 {|x, y| $x + $y}
+            | window 2 
+            | enumerate
+
+  let files = $data 
+            | filter {$in.index mod 2 == 0} 
+            | each { {fname: ($in.index // 2), start: $in.item.0, end: $in.item.1} }
+  let spaces = $data 
+            | filter {$in.index mod 2 != 0 and $in.item != 0} 
+            | each { {start: $in.item.0, end: $in.item.1} }
+  {files: $files spaces: $spaces}
 }
