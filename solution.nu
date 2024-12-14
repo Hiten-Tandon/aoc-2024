@@ -79,3 +79,13 @@ export def "solve day8 part2" [] {
   get_day initialize 8
   day8 part2
 }
+
+export def "solve day13 part1" [] {
+  get_day initialize 13
+  day13 part1
+}
+
+export def "solve day13 part2" [] {
+  get_day initialize 13
+  day13 part2
+}
