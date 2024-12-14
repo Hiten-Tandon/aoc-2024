@@ -6,6 +6,7 @@ use day4.nu
 use day5.nu
 use day7.nu
 use day8.nu
+use day13.nu
 use std/log
 
 export def "solve day1 part1" [] {
