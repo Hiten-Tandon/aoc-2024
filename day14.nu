@@ -45,23 +45,30 @@ export def part2 [] {
       ).1 
     }
 
-  let res = (
-    0..($HEIGHT * $WIDTH)
-      | each { |idx|
-          $data 
-          | update px {|row| ($row.px + $row.vx * $idx) mod $WIDTH }
-          | update py {|row| ($row.py + $row.vy * $idx) mod $HEIGHT }
-          | select px py
-          | math variance
-          | each { $in.px * $in.py }
+  mut res_x = (
+    0..$HEIGHT 
+      | each {|idx|  
+          ($data | update px {|row| ($row.px + $row.vx * $idx) mod $WIDTH }).px | math variance
       }
-      | enumerate
-      | sort-by item
-      | first
+      | enumerate 
+      | reduce {|x acc| if $x.item < $acc.item { $x } else { $acc } }
   ).index
 
-  wl-copy $res
-  $res
+  let res_y = (
+    0..$HEIGHT 
+      | each {|idx|  
+          ($data | update py {|row| ($row.py + $row.vy * $idx) mod $HEIGHT }).py | math variance
+      }
+      | enumerate 
+      | reduce {|x acc| if $x.item < $acc.item { $x } else { $acc } }
+  ).index
+
+  while $res_x mod $HEIGHT != $res_y {
+    $res_x += $WIDTH
+  }
+
+  wl-copy $res_x
+  $res_x
 }
 
 export def "part2 images" [] {
