@@ -44,9 +44,8 @@ export def part2 [] {
         | transpose px py vx vy --ignore-titles
       ).1 
     }
-
   mut res_x = (
-    0..$HEIGHT 
+    0..$WIDTH
       | each {|idx|  
           ($data | update px {|row| ($row.px + $row.vx * $idx) mod $WIDTH }).px | math variance
       }
