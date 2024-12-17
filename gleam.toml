@@ -22,5 +22,6 @@ gleam_http = ">= 3.7.1 and < 4.0.0"
 gleam_yielder = ">= 1.1.0 and < 2.0.0"
 gleam_regexp = ">= 1.0.0 and < 2.0.0"
 glearray = ">= 1.0.0 and < 2.0.0"
+priorityq = ">= 0.1.0 and < 1.0.0"
 
 [dev-dependencies]
