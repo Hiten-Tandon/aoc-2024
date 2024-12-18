@@ -126,5 +126,4 @@ export def part2 [] {
       }
     }
   }
-  $tops
 }
