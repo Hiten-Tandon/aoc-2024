@@ -42,10 +42,8 @@ export def part1 [] {
 export def part2 [] {
   let corrupted_blocks = (open ~/.cache/aoc/2024/day18/input.txt | lines | each { str trim })
   mut dsu = {}
-  mut lefts = []
-  mut rights = []
-  mut tops = []
-  mut bottoms = []
+  mut top_rights = []
+  mut bottom_lefts = []
 
   def get_par [dsu: record, u: string] any {
     mut res = $u
@@ -79,47 +77,26 @@ export def part2 [] {
     }
 
     let temp = $x.item | split row , | each { into int }
-    if $temp.0 == 0 {
-      $tops = $tops | append $x.item
-    } else if $temp.0 == 70 {
-      $bottoms = $bottoms | append $x.item
-    } else if $temp.1 == 0 {
-      $lefts = $lefts | append $x.item
-    } else if $temp.1 == 70 {
-      $rights = $rights | append $x.item
-    }
-    let temp = $dsu
-    $lefts = $lefts | each { get_par $temp $in } | uniq
-    $rights = $rights | each { get_par $temp $in } | uniq
-    $tops = $tops | each { get_par $temp $in } | uniq
-    $bottoms = $bottoms | each { get_par $temp $in } | uniq
+    if $temp.0 == 0 or $temp.1 == 70 {
+      $top_rights = $top_rights | append $x.item
+    } else if $temp.0 == 70 or $temp.1 == 0 {
+      $bottom_lefts = $bottom_lefts | append $x.item
+    } 
 
-    for l in $lefts {
-      for r in $rights {
+    let temp = $dsu
+    $bottom_lefts = $bottom_lefts | par-each { get_par $temp $in } | uniq
+    $top_rights = $top_rights | par-each { get_par $temp $in } | uniq
+
+    for l in $bottom_lefts {
+      for r in $top_rights {
         if $l == $r {
           wl-copy $x.item
           return $x.item
         }
       }
 
-      for t in $tops {
+      for t in $top_rights {
         if $l == $t {
-          wl-copy $x.item
-          return $x.item
-        }
-      }
-    }
-
-    for b in $bottoms {
-      for r in $rights {
-        if $b == $r {
-          wl-copy $x.item
-          return $x.item
-        }
-      }
-
-      for t in $tops {
-        if $b == $t {
           wl-copy $x.item
           return $x.item
         }
