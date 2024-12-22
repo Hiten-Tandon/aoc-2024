@@ -22,7 +22,7 @@ export def part2 [] {
       | each { str trim }
   )
   mut store = (open ~/.cache/aoc/2024/day19/input.txt | split row "\n\n" | last | lines | each { $in })
-  mut req_patterns = (0..<($store | length) | collect { |x| [$x] })
+  mut req_patterns = (0..<($store | length) | collect { |x| [[],$x] })
   mut res = 0
   while ($req_patterns | length) != 0 {
     let req = $req_patterns | last
