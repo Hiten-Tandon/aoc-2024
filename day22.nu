@@ -32,10 +32,11 @@ export def part2 [] {
         | each { {diff: ($in.1 - $in.0), val: $in.1} }
         | window 4
         | uniq-by diff
+        | par-each { { diff: ($in.diff | each { into string } | str join ,), val: $in.val.3 } }
       }
       | flatten
-      | group-by { $in.diff | each { into string } | str join , } --to-table
-      | par-each { $in.items | each {$in.val.3} | math sum } 
+      | group-by diff --to-table
+      | par-each { $in.items | each {$in.val} | math sum } 
       | math max
   )
   wl-copy $res
