@@ -2,7 +2,7 @@ export def part1 [] {
   let data = (
     open ~/.cache/aoc/2024/day1/input.txt
       | lines 
-      | each {$in | split words}
+      | each { split words }
       | into record 
       | transpose
   );
@@ -23,7 +23,7 @@ export def part2 [] {
   let data = (
     open ~/.cache/aoc/2024/day1/input.txt
       | lines 
-      | each {$in | split words}
+      | each { split words }
       | into record 
       | transpose
   );
